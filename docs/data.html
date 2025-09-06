@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Table</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    table { border-collapse: collapse; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: center; }
+    th { cursor: pointer; background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/projects/">Projects</a>
+    <a href="/contact/">Contact</a>
+    <a href="/data.html">Data</a>
+  </nav>
+  <main>
+    <h1>Data Table</h1>
+    <table id="data-table"></table>
+  </main>
+  <script>
+    const colorStops = [
+      { value: 20, color: "#ff0000" }, // low
+      { value: 50, color: "#ffff00" }, // mid
+      { value: 80, color: "#00ff00" }  // high
+    ];
+    const mainCols = ["sWHF","oWHF","sSS","oSS"];
+
+    function hexToRgb(hex) {
+      const num = parseInt(hex.slice(1), 16);
+      return [ (num>>16)&255, (num>>8)&255, num&255 ];
+    }
+    function rgbToHex([r,g,b]) {
+      return "#" + [r,g,b].map(v=>v.toString(16).padStart(2,"0")).join("");
+    }
+    function lerp(a,b,t){ return a+(b-a)*t; }
+    function interpColor(val) {
+      let lower=colorStops[0], upper=colorStops[colorStops.length-1];
+      for (let i=0;i<colorStops.length-1;i++){
+        if (val>=colorStops[i].value && val<=colorStops[i+1].value){
+          lower=colorStops[i]; upper=colorStops[i+1]; break;
+        }
+      }
+      const t=(val-lower.value)/(upper.value-lower.value);
+      const lr=hexToRgb(lower.color), ur=hexToRgb(upper.color);
+      const mix=[lerp(lr[0],ur[0],t),lerp(lr[1],ur[1],t),lerp(lr[2],ur[2],t)];
+      return rgbToHex(mix.map(Math.round));
+    }
+
+    async function loadTable() {
+      const resp = await fetch("/assets/data/data.csv");
+      const text = await resp.text();
+      const rows = text.trim().split("\n").map(r=>r.split(","));
+      const table = document.getElementById("data-table");
+      table.innerHTML="";
+      const thead=document.createElement("thead");
+      const hrow=document.createElement("tr");
+      rows[0].forEach((h,i)=>{
+        const th=document.createElement("th");
+        th.textContent=h;
+        th.onclick=()=>sortTable(i);
+        hrow.appendChild(th);
+      });
+      thead.appendChild(hrow);
+      table.appendChild(thead);
+      const tbody=document.createElement("tbody");
+      rows.slice(1).forEach(r=>{
+        const tr=document.createElement("tr");
+        r.forEach((c,i)=>{
+          const td=document.createElement("td");
+          td.textContent=c;
+          const col=rows[0][i];
+          if(mainCols.includes(col)){
+            const v=parseFloat(c);
+            if(!isNaN(v)) td.style.backgroundColor=interpColor(v);
+          }
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+    }
+
+    function sortTable(colIndex){
+      const table=document.getElementById("data-table");
+      const tbody=table.tBodies[0];
+      const rows=Array.from(tbody.rows);
+      const asc=!table.asc;
+      rows.sort((a,b)=>{
+        const av=a.cells[colIndex].textContent;
+        const bv=b.cells[colIndex].textContent;
+        const na=parseFloat(av), nb=parseFloat(bv);
+        if(!isNaN(na)&&!isNaN(nb)) return asc?na-nb:nb-na;
+        return asc?av.localeCompare(bv):bv.localeCompare(av);
+      });
+      rows.forEach(r=>tbody.appendChild(r));
+      table.asc=asc;
+    }
+
+    loadTable();
+  </script>
+</body>
+</html>
