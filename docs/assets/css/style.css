@@ -15,17 +15,24 @@ nav a {
 #baseball-table {
   width: 100%;
   border-collapse: collapse;
+  border: none;
   font-size: 0.9rem;
+  table-layout: fixed;
 }
 
 #baseball-table th,
 #baseball-table td {
-  border: 1px solid #ddd;
+  border: none;
+  border-bottom: 1px solid #eee;
   padding: 6px 10px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #baseball-table th {
+  border-bottom: 2px solid #ddd;
   background-color: #f2f2f2;
   font-weight: bold;
   cursor: pointer;
@@ -56,18 +63,102 @@ nav a {
   background-color: #f0f0f0;
 }
 
-/* Color coding for performance metrics */
-.velo-high { background-color: #d4edda !important; } /* Green for high velocity */
-.velo-med { background-color: #fff3cd !important; } /* Yellow for medium velocity */
-.velo-low { background-color: #f8d7da !important; } /* Red for low velocity */
+/* Column-specific widths */
+/* Player name column */
+#baseball-table th:nth-child(3),
+#baseball-table td:nth-child(3) {
+  width: 150px;
+  text-align: left;
+  padding-left: 15px;
+}
 
-.spin-high { background-color: #cce5ff !important; } /* Blue for high spin */
-.spin-med { background-color: #e6f3ff !important; } /* Light blue for medium spin */
-.spin-low { background-color: #fff0b3 !important; } /* Light yellow for low spin */
+/* Short text columns (level, game_type, hand_p, type) */
+#baseball-table th:nth-child(1),
+#baseball-table td:nth-child(1),
+#baseball-table th:nth-child(2),
+#baseball-table td:nth-child(2),
+#baseball-table th:nth-child(5),
+#baseball-table td:nth-child(5),
+#baseball-table th:nth-child(6),
+#baseball-table td:nth-child(6) {
+  width: 60px;
+}
 
-.movement-good { background-color: #d1ecf1 !important; } /* Light blue for good movement */
-.movement-avg { background-color: #f9f9f9 !important; } /* Gray for average movement */
-.movement-poor { background-color: #fce4e4 !important; } /* Light red for poor movement */
+/* ID and Year columns */
+#baseball-table th:nth-child(4),
+#baseball-table td:nth-child(4),
+#baseball-table th:nth-child(7),
+#baseball-table td:nth-child(7) {
+  width: 80px;
+}
+
+/* Pitch count columns (p, sp, op) */
+#baseball-table th:nth-child(8),
+#baseball-table td:nth-child(8),
+#baseball-table th:nth-child(9),
+#baseball-table td:nth-child(9),
+#baseball-table th:nth-child(10),
+#baseball-table td:nth-child(10) {
+  width: 70px;
+}
+
+/* Velocity column */
+#baseball-table th:nth-child(11),
+#baseball-table td:nth-child(11) {
+  width: 75px;
+}
+
+/* Movement columns (xr, ext, zr, ax, az) */
+#baseball-table th:nth-child(12),
+#baseball-table td:nth-child(12),
+#baseball-table th:nth-child(13),
+#baseball-table td:nth-child(13),
+#baseball-table th:nth-child(14),
+#baseball-table td:nth-child(14),
+#baseball-table th:nth-child(15),
+#baseball-table td:nth-child(15),
+#baseball-table th:nth-child(16),
+#baseball-table td:nth-child(16) {
+  width: 65px;
+}
+
+/* Spin rate column */
+#baseball-table th:nth-child(17),
+#baseball-table td:nth-child(17) {
+  width: 75px;
+}
+
+/* Spin movement columns (ssh, ssv) */
+#baseball-table th:nth-child(18),
+#baseball-table td:nth-child(18),
+#baseball-table th:nth-child(19),
+#baseball-table td:nth-child(19) {
+  width: 65px;
+}
+
+/* Attack angle column */
+#baseball-table th:nth-child(20),
+#baseball-table td:nth-child(20) {
+  width: 65px;
+}
+
+/* Performance percentage columns (sWHF, oWHF, sSS, oSS) */
+#baseball-table th:nth-child(21),
+#baseball-table td:nth-child(21),
+#baseball-table th:nth-child(22),
+#baseball-table td:nth-child(22),
+#baseball-table th:nth-child(23),
+#baseball-table td:nth-child(23),
+#baseball-table th:nth-child(24),
+#baseball-table td:nth-child(24) {
+  width: 70px;
+}
+
+/* Default width for any additional columns */
+#baseball-table th:nth-child(n+25),
+#baseball-table td:nth-child(n+25) {
+  width: 80px;
+}
 
 #loading {
   text-align: center;
