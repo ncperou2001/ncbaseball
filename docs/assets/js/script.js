@@ -200,11 +200,11 @@ function applyColorCoding(cell, header, value) {
     function getPercentageColor(value) {
         const stops = [10, 20, 50, 80, 90];
         const colors = [
-            { r: 248, g: 215, b: 218 }, // stop1
-            { r: 255, g: 243, b: 205 }, // stop2
-            { r: 212, g: 237, b: 218 }, // stop3
-            { r: 195, g: 230, b: 203 }, // stop4
-            { r: 180, g: 220, b: 200 }  // stop5
+            { r: 128, g:  64, b:   0 }, // stop1
+            { r: 255, g:   0, b:   0 }, // stop2
+            { r: 255, g: 220, b:  76 }, // stop3
+            { r:   0, g: 255, b: 255 }, // stop4
+            { r: 255, g: 200, b: 255 }  // stop5
         ];
 
         if (value <= stops[0]) return rgbToHex(colors[0].r, colors[0].g, colors[0].b);
