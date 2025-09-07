@@ -137,33 +137,35 @@ function renderTable(headers, data) {
     console.log("Table rendered successfully");
 }
 
+
+// Enhance sorting feature with visual indicators
 function sortTable(column) {
     console.log("Sorting by column:", column);
-    
+
     if (!baseballData || baseballData.length === 0) {
         console.error("No data to sort");
         return;
     }
-    
+
     if (sortColumn === column) {
         sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
         sortColumn = column;
         sortDirection = 'asc';
     }
-    
+
     const sortedData = [...baseballData].sort((a, b) => {
         let aVal = a[column] || '';
         let bVal = b[column] || '';
-        
+
         // Try to parse as numbers for proper numeric sorting
         const aNum = parseFloat(aVal);
         const bNum = parseFloat(bVal);
-        
+
         if (!isNaN(aNum) && !isNaN(bNum)) {
             return sortDirection === 'asc' ? aNum - bNum : bNum - aNum;
         }
-        
+
         // String comparison
         if (sortDirection === 'asc') {
             return aVal.localeCompare(bVal);
@@ -171,9 +173,34 @@ function sortTable(column) {
             return bVal.localeCompare(aVal);
         }
     });
-    
+
     const headers = Object.keys(baseballData[0] || {});
     renderTable(headers, sortedData);
+}
+
+// Add filtering feature
+function addFilters(headers) {
+    const filterRow = document.createElement('tr');
+
+    headers.forEach(header => {
+        const filterCell = document.createElement('th');
+        const filterInput = document.createElement('input');
+        filterInput.type = 'text';
+        filterInput.placeholder = `Filter ${header}`;
+        filterInput.addEventListener('input', () => {
+            const filterValue = filterInput.value.toLowerCase();
+            const filteredData = baseballData.filter(row => {
+                const cellValue = (row[header] || '').toLowerCase();
+                return cellValue.includes(filterValue);
+            });
+            renderTable(headers, filteredData);
+        });
+        filterCell.appendChild(filterInput);
+        filterRow.appendChild(filterCell);
+    });
+
+    const headerRow = document.getElementById('table-header');
+    headerRow.parentNode.insertBefore(filterRow, headerRow.nextSibling);
 }
 
 function applyColorCoding(cell, header, value) {
