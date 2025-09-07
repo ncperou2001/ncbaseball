@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baseball Data</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/ncbaseball/">Home</a>
+        <a href="/ncbaseball/about/">About</a>
+        <a href="/ncbaseball/projects/">Projects</a>
+        <a href="/ncbaseball/contact/">Contact</a>
+        <a href="/ncbaseball/data/">Data</a>
+    </nav>
+    <main>
+        <h1>Baseball Pitching Statistics</h1>
+        <p>Click column headers to sort. Cells are color-coded based on performance metrics.</p>
+        <div id="loading">Loading data...</div>
+        <div id="table-container" style="display: none;">
+            <table id="baseball-table">
+                <thead>
+                    <tr id="table-header">
+                        <!-- Headers will be populated by JavaScript -->
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Data rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>

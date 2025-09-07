@@ -5,3 +5,73 @@ body {
 nav a {
   margin-right: 1rem;
 }
+
+/* Table Styles */
+#table-container {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+#baseball-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+#baseball-table th,
+#baseball-table td {
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+#baseball-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  top: 0;
+}
+
+#baseball-table th:hover {
+  background-color: #e0e0e0;
+}
+
+#baseball-table th.sort-asc::after {
+  content: " ?";
+  color: #666;
+}
+
+#baseball-table th.sort-desc::after {
+  content: " ?";
+  color: #666;
+}
+
+#baseball-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#baseball-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Color coding for performance metrics */
+.velo-high { background-color: #d4edda !important; } /* Green for high velocity */
+.velo-med { background-color: #fff3cd !important; } /* Yellow for medium velocity */
+.velo-low { background-color: #f8d7da !important; } /* Red for low velocity */
+
+.spin-high { background-color: #cce5ff !important; } /* Blue for high spin */
+.spin-med { background-color: #e6f3ff !important; } /* Light blue for medium spin */
+.spin-low { background-color: #fff0b3 !important; } /* Light yellow for low spin */
+
+.movement-good { background-color: #d1ecf1 !important; } /* Light blue for good movement */
+.movement-avg { background-color: #f9f9f9 !important; } /* Gray for average movement */
+.movement-poor { background-color: #fce4e4 !important; } /* Light red for poor movement */
+
+#loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin: 2rem 0;
+}

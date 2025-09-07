@@ -1,5 +1,4 @@
 level,game_type,pitcher_name,pitcher_id,hand_p,type,game_year,p,sp,op,velo,xr,ext,zr,ax,az,spin,ssh,ssv,aa,sWHF,oWHF,sSS,oSS
-,,,,,,,,,,median,median,median,median,median,median,median,median,median,median,mean,mean,mean,mean
 MLB,R,A.J. Alexy,669935,R,FF,2021,230,137,93,93.4,-1.2,6.7,6.0,-5.2,20.9,2223,2.8,0.7,45,59,52,41,42
 MLB,R,A.J. Alexy,669935,R,FF,2022,85,56,29,94.4,-1.0,6.5,6.1,-7.9,20.5,2138,1.3,0.5,43,53,53,41,41
 MLB,R,A.J. Cole,595918,R,FF,2020,89,47,42,93.0,-1.0,6.7,5.9,-9.5,19.2,2334,3.2,1.8,37,56,58,43,42
