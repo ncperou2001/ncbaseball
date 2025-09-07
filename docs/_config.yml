@@ -1,0 +1,22 @@
+# GitHub Pages configuration for ncbaseball
+title: NC Baseball
+description: Baseball analytics and data visualization
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Include and exclude files
+include:
+  - .nojekyll
+
+exclude:
+  - README.md
+  - .gitignore
+
+# GitHub Pages settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap

@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Baseball Data</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <nav>
-        <a href="/ncbaseball/">Home</a>
-        <a href="/ncbaseball/about/">About</a>
-        <a href="/ncbaseball/projects/">Projects</a>
-        <a href="/ncbaseball/contact/">Contact</a>
-        <a href="/ncbaseball/data/">Data</a>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/projects/">Projects</a>
+        <a href="/contact/">Contact</a>
+        <a href="/data/">Data</a>
     </nav>
     <main>
         <h1>Baseball Pitching Statistics</h1>
         <p>Click column headers to sort. Cells are color-coded based on performance metrics.</p>
+        <div id="debug-info" style="background-color: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 12px;">
+            <strong>Debug Info:</strong><br>
+            Current URL: <span id="current-url"></span><br>
+            Path: <span id="current-path"></span><br>
+            Base URL: <span id="base-url"></span><br>
+        </div>
         <div id="loading">Loading data...</div>
         <div id="table-container" style="display: none;">
             <table id="baseball-table">
@@ -30,6 +36,14 @@
             </table>
         </div>
     </main>
-    <script src="/assets/js/script.js"></script>
+    <script>
+        // Add debug information
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('current-url').textContent = window.location.href;
+            document.getElementById('current-path').textContent = window.location.pathname;
+            document.getElementById('base-url').textContent = window.location.origin;
+        });
+    </script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
