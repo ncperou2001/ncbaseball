@@ -9,7 +9,7 @@ nav a {
 /* Table Styles */
 #table-container {
   overflow-x: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 #baseball-table {
@@ -24,11 +24,18 @@ nav a {
 #baseball-table td {
   border: none;
   border-bottom: 1px solid #eee;
+  border-right: 1px solid #000;
   padding: 6px 10px;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Remove right border from last column */
+#baseball-table th:last-child,
+#baseball-table td:last-child {
+  border-right: none;
 }
 
 #baseball-table th {
@@ -67,9 +74,9 @@ nav a {
 /* Player name column */
 #baseball-table th:nth-child(3),
 #baseball-table td:nth-child(3) {
-  width: 150px;
-  text-align: left;
-  padding-left: 15px;
+  width: 110px;
+  text-align: center;
+  padding-left: 2px;
 }
 
 /* Short text columns (level, game_type, hand_p, type) */
@@ -81,7 +88,7 @@ nav a {
 #baseball-table td:nth-child(5),
 #baseball-table th:nth-child(6),
 #baseball-table td:nth-child(6) {
-  width: 30px;
+  width: 20px;
 }
 
 /* ID and Year columns */
@@ -89,7 +96,7 @@ nav a {
 #baseball-table td:nth-child(4),
 #baseball-table th:nth-child(7),
 #baseball-table td:nth-child(7) {
-  width: 30px;
+  width: 20px;
 }
 
 /* Pitch count columns (p, sp, op) */
@@ -105,7 +112,7 @@ nav a {
 /* Velocity column */
 #baseball-table th:nth-child(11),
 #baseball-table td:nth-child(11) {
-  width: 30px;
+  width: 20px;
 }
 
 /* Movement columns (xr, ext, zr, ax, az) */
@@ -119,13 +126,13 @@ nav a {
     #baseball-table td:nth-child(15),
     #baseball-table th:nth-child(16),
     #baseball-table td:nth-child(16) {
-        width: 30px;
+        width: 20px;
     }
 
 /* Spin rate column */
     #baseball-table th:nth-child(17),
     #baseball-table td:nth-child(17) {
-        width: 30px;
+        width: 20px;
     }
 
 /* Spin movement columns (ssh, ssv) */
@@ -133,13 +140,13 @@ nav a {
     #baseball-table td:nth-child(18),
     #baseball-table th:nth-child(19),
     #baseball-table td:nth-child(19) {
-        width: 30px;
+        width: 20px;
     }
 
 /* Attack angle column */
     #baseball-table th:nth-child(20),
     #baseball-table td:nth-child(20) {
-        width: 30px;
+        width: 20px;
     }
 
 /* Performance percentage columns (sWHF, oWHF, sSS, oSS) */
@@ -151,13 +158,13 @@ nav a {
     #baseball-table td:nth-child(23),
     #baseball-table th:nth-child(24),
     #baseball-table td:nth-child(24) {
-        width: 30px;
+        width: 24px;
     }
 
 /* Default width for any additional columns */
 #baseball-table th:nth-child(n+25),
 #baseball-table td:nth-child(n+25) {
-  width: 50px;
+  width: 40px;
 }
 
 #loading {
