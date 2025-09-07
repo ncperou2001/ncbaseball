@@ -178,51 +178,49 @@ function sortTable(column) {
 
 function applyColorCoding(cell, header, value) {
     if (!value || value === '') return;
-    
+
     const numValue = parseFloat(value);
-    
-    // Color code velocity (velo)
-    if (header === 'velo' && !isNaN(numValue)) {
-        if (numValue >= 95) {
-            cell.classList.add('velo-high');
-        } else if (numValue >= 90) {
-            cell.classList.add('velo-med');
-        } else {
-            cell.classList.add('velo-low');
+    if (isNaN(numValue)) return;
+
+    function rgbToHex(r, g, b) {
+        return "#" + [r, g, b].map(x => {
+            const hex = Math.round(x).toString(16);
+            return hex.length === 1 ? "0" + hex : hex;
+        }).join("");
+    }
+
+    function lerpColor(c1, c2, t) {
+        return {
+            r: c1.r + (c2.r - c1.r) * t,
+            g: c1.g + (c2.g - c1.g) * t,
+            b: c1.b + (c2.b - c1.b) * t
+        };
+    }
+
+    function getPercentageColor(value) {
+        const stops = [10, 20, 50, 80, 90];
+        const colors = [
+            { r: 248, g: 215, b: 218 }, // stop1
+            { r: 255, g: 243, b: 205 }, // stop2
+            { r: 212, g: 237, b: 218 }, // stop3
+            { r: 195, g: 230, b: 203 }, // stop4
+            { r: 180, g: 220, b: 200 }  // stop5
+        ];
+
+        if (value <= stops[0]) return rgbToHex(colors[0].r, colors[0].g, colors[0].b);
+        if (value >= stops[stops.length - 1]) return rgbToHex(colors[colors.length - 1].r, colors[colors.length - 1].g, colors[colors.length - 1].b);
+
+        for (let i = 0; i < stops.length - 1; i++) {
+            if (value >= stops[i] && value <= stops[i + 1]) {
+                const t = (value - stops[i]) / (stops[i + 1] - stops[i]);
+                const c = lerpColor(colors[i], colors[i + 1], t);
+                return rgbToHex(c.r, c.g, c.b);
+            }
         }
     }
-    
-    // Color code spin rate (spin)
-    else if (header === 'spin' && !isNaN(numValue)) {
-        if (numValue >= 2400) {
-            cell.classList.add('spin-high');
-        } else if (numValue >= 2000) {
-            cell.classList.add('spin-med');
-        } else {
-            cell.classList.add('spin-low');
-        }
-    }
-    
-    // Color code movement metrics (ax, az, ext)
-    else if (['ax', 'az', 'ext'].includes(header) && !isNaN(numValue)) {
-        const absValue = Math.abs(numValue);
-        if (absValue >= 15) {
-            cell.classList.add('movement-good');
-        } else if (absValue >= 5) {
-            cell.classList.add('movement-avg');
-        } else {
-            cell.classList.add('movement-poor');
-        }
-    }
-    
-    // Color code percentage stats (sWHF, oWHF, sSS, oSS, aa)
-    else if (['sWHF', 'oWHF', 'sSS', 'oSS', 'aa'].includes(header) && !isNaN(numValue)) {
-        if (numValue >= 60) {
-            cell.classList.add('velo-high'); // Green for high percentages
-        } else if (numValue >= 40) {
-            cell.classList.add('velo-med'); // Yellow for medium percentages
-        } else {
-            cell.classList.add('velo-low'); // Red for low percentages
-        }
+
+    if (['sWHF', 'oWHF', 'sSS', 'oSS'].includes(header)) {
+        const backgroundColor = getPercentageColor(numValue);
+        cell.style.backgroundColor = backgroundColor;
     }
 }
