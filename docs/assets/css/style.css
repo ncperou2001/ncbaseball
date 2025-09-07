@@ -15,14 +15,16 @@ nav a {
 #baseball-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #000;
+  border: none;
   font-size: 0.9rem;
   table-layout: fixed;
 }
 
 #baseball-table th,
 #baseball-table td {
-  border: 1px solid #000;
+  border: none;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #000;
   padding: 6px 10px;
   text-align: center;
   overflow: hidden;
@@ -30,7 +32,14 @@ nav a {
   white-space: nowrap;
 }
 
+/* Remove right border from last column */
+#baseball-table th:last-child,
+#baseball-table td:last-child {
+  border-right: none;
+}
+
 #baseball-table th {
+  border-bottom: 2px solid #ddd;
   background-color: #f2f2f2;
   font-weight: bold;
   cursor: pointer;
@@ -53,25 +62,12 @@ nav a {
   color: #666;
 }
 
-/* Add alternating row colors for better readability */
-#baseball-table tbody tr:nth-child(odd) {
+#baseball-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-#baseball-table tbody tr:nth-child(even) {
-  background-color: #ffffff;
-}
 
-/* Add hover effect for rows */
 #baseball-table tbody tr:hover {
-  background-color: #e0e0e0;
-}
-
-/* Ensure the table header is fixed */
-#baseball-table thead {
-  position: sticky;
-  top: 0;
-  background-color: #ffffff;
-  z-index: 1;
+  background-color: #f0f0f0;
 }
 
 /* Column-specific widths */
